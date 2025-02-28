@@ -1,0 +1,22 @@
+#BlueJ class context
+comment0.target=NewsFeed
+comment0.text=\n\ La\ clase\ NewsFeed\ almacena\ posts\ de\ noticias\ de\ una\ red\ social.\n\ \n\ El\ estado\ del\ newsfeed\ consta\ de\ una\ lista\ de\ todos\ los\ posts\ de\ mensajes\ \n\ (objetos\ de\ tipo\ MessagePost).\ La\ lista\ est\u00E1\ ordenada\ por\ timestamp.\ \n\ \n\ \n\ @author\ Michael\ K\u00F6lling\ and\ David\ J.\ Barnes\n\ @version\ 0.1\n
+comment1.params=
+comment1.target=NewsFeed()
+comment1.text=\n\ Construye\ un\ newsfeed\ vac\u00EDo\n
+comment2.params=message
+comment2.target=void\ addMessagePost(MessagePost)
+comment2.text=\n\ A\u00F1ade\ un\ mensaje\ de\ texto\ al\ newsfeed.\ El\ mensaje\ a\ agregar\n\ se\ ubica\ en\ la\ lista\ de\ mensajes\ de\ manera\ ordenada\ por\ timestamp.\ El\ \n\ mensaje\ no\ puede\ ser\ nulo,\ debe\ satisfacer\ su\ respectivo\ invariante,\n\ y\ no\ debe\ existir\ en\ la\ lista\ otro\ mensaje\ con\ el\ mismo\ timestamp.\n\ \n\ @param\ text\ es\ el\ mensaje\ de\ texto\ a\ agregar.\n
+comment3.params=username
+comment3.target=void\ eliminarUsername(java.lang.String)
+comment3.text=\n\ Elimina\ de\ la\ lista\ de\ mensajes\ todos\ los\ posts\ de\ un\ username\ determinado.\ \n\ @param\ username\ es\ el\ username\ cuyos\ posts\ se\ quiere\ eliminar\n\ Precondici\u00F3n\:\ el\ par\u00E1metro\ no\ debe\ ser\ nulo\ ni\ vac\u00EDo.\n\ Postcondici\u00F3n\:\ Se\ eliminar\ de\ la\ lista\ de\ posts\ todos\ los\ posts\ cuyo\ autor\ (username)\n\ coincida\ con\ el\ par\u00E1metro\ del\ m\u00E9todo.\ \n
+comment4.params=
+comment4.target=java.util.ArrayList\ ceroLikes()
+comment4.text=\n\ Retorna\ la\ lista\ de\ posts\ en\ las\ cuales\ el\ n\u00FAmero\ de\ likes\ es\ cero.\n\ @return\ la\ lista\ de\ mensajes\ (texto\ del\ mensaje)\ que\ poseen\ cero\ likes.\n
+comment5.params=time
+comment5.target=MessagePost\ masCercana(int)
+comment5.text=\n\ Retorna\ el\ message\ post\ cuyo\ timestamp\ es\ el\ m\u00E1s\ cercano\ posible\ al\ par\u00E1metro\ del\ m\u00E9todo\n\ @param\ time\ es\ el\ tiempo\ (timestamp)\ con\ el\ cual\ se\ deben\ comparar\ los\ timestamps\ de\ la\ lista\ de\ posts\n\ @return\ el\ post\ m\u00E1s\ cercano\ al\ valor\ time\ pasado\ como\ par\u00E1metro.\ \n
+comment6.params=
+comment6.target=boolean\ repOK()
+comment6.text=\n\ Invariante\ de\ clase\ de\ NewsFeed.\ Un\ NewsFeed\ se\ considera\ v\u00E1lido,\ o\n\ internamente\ consistente,\ si\ su\ lista\ de\ posts\ no\ es\ nula,\ todos\ los\ posts\ de\ la\ lista\n\ son\ no\ nulos,\ satisfacen\ su\ respectivo\ repOK,\ no\ hay\ timestamps\ repetidos,\ y\ los\ posts\n\ se\ encuentran\ en\ la\ lista\ ordenados\ por\ timestamp.\n\ @return\ true\ si\ y\ s\u00F3lo\ si\ el\ objeto\ satisface\ el\ invariante\ de\ clase.\n
+numComments=7

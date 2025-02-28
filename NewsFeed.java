@@ -37,10 +37,10 @@ public class NewsFeed
         //TODO implementar este método, incluyendo chequeo de precondición.
         if(message == null){
             throw new IllegalArgumentException("El mensaje no puede ser nulo");
-        }
+        } // chequeo incompleto de precondición
         int index = 0;
-        if(index >= 0 && index < messages.size()){
-            messages.add(message);
+        if(index >= 0 && index < messages.size()){ // mal
+            messages.add(message); // mal
         }
     }
 
@@ -59,7 +59,7 @@ public class NewsFeed
         }
         for(MessagePost p : messages){
             if(p.equals(username)){
-                messages.remove(username);
+                messages.remove(username); // usa for-each con un ciclo destructivo. Mal
             }
         }
     }
@@ -76,7 +76,7 @@ public class NewsFeed
                 System.out.println(x);
             }
         }
-        return ceroLikes();
+        return ceroLikes(); // mal. Termina en ciclo infinito. No genera la salida requerida
         //TODO Implementar este método, incluyendo posiblemente chequeo de precondición
     }
     
@@ -89,7 +89,7 @@ public class NewsFeed
     {
         //TODO Implementar este método, incluyendo posiblemente chequeo de precondición
         time = 0;
-        int a = messages.size() - 1;
+        int a = messages.size() - 1; // mal. No resuelve el problema planteado en este método
         while(time < a){
             int mid = (time + a) / 2;
             if(time == a){
@@ -114,7 +114,7 @@ public class NewsFeed
      */
     public boolean repOK()
     {
-        //TODO Implementar este método
+        //TODO Implementar este método // incompleto
         return messages != null;
     }
     

@@ -37,13 +37,13 @@ public class MessagePost
     public MessagePost(String author, String text)
     {
         //TODO implementar este método incluyendo chequeo de precondición
-        if(author.isEmpty() || author == null){
+        if(author.isEmpty() || author == null){ // error, debe chequear al revés
             throw new IllegalArgumentException("el author no puede ser nulo y tampoco vacio");
         }
-        if(text.isEmpty() || text == null){
+        if(text.isEmpty() || text == null){ // error, debe chequear al revés
             throw new IllegalArgumentException("el text no puede ser nulo y tampoco vacio");
         }
-        if(likes != 0){
+        if(likes != 0){ // mal chequeo de precondición
             this.likes = 0;
         }
         //setear System.current.TimeMillis(timestamp);
@@ -123,13 +123,13 @@ public class MessagePost
     public boolean repOK() 
     {
         //TODO Implementar este método
-        if(username == null && username.isEmpty()){ 
+        if(username == null && username.isEmpty()){ // mal condición
             return false;
         }
-        if(message == null && message.isEmpty()){
+        if(message == null && message.isEmpty()){ // mal condición
             return false;
         }
-        if(timestamp < 0){
+        if(timestamp < 0){ // mal condición
             return false;
         }
         if(likes < 0){
