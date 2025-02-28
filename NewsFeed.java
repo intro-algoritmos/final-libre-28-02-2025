@@ -35,8 +35,14 @@ public class NewsFeed
     public void addMessagePost(MessagePost message)
     {
         //TODO implementar este método, incluyendo chequeo de precondición.
+        if(message == null){
+            throw new IllegalArgumentException("El mensaje no puede ser nulo");
+        }
+        int index = 0;
+        if(index >= 0 && index < messages.size()){
+            messages.add(message);
+        }
     }
-
 
     /**
      * Elimina de la lista de mensajes todos los posts de un username determinado. 
@@ -48,6 +54,14 @@ public class NewsFeed
     public void eliminarUsername(String username)
     {
         //TODO: Implementar este método, incluyendo chequeo de precondición.
+        if(username.isEmpty() || username == null ){
+            throw new IllegalArgumentException("el parametro no puede ser vacio y nulo");
+        }
+        for(MessagePost p : messages){
+            if(p.equals(username)){
+                messages.remove(username);
+            }
+        }
     }
     
     /**
@@ -55,19 +69,39 @@ public class NewsFeed
      * @return la lista de mensajes (texto del mensaje) que poseen cero likes.
      */
     public ArrayList<String> ceroLikes()
+
     {
-        return null;
+        for(MessagePost x : messages){
+            if(x.getLikes() > 0){
+                System.out.println(x);
+            }
+        }
+        return ceroLikes();
         //TODO Implementar este método, incluyendo posiblemente chequeo de precondición
     }
     
     /**
      * Retorna el message post cuyo timestamp es el más cercano posible al parámetro del método
      * @param time es el tiempo (timestamp) con el cual se deben comparar los timestamps de la lista de posts
-     * @return el post más cercano al valor time pasado como parámetro.
+     * @return el post más cercano al valor time pasado como parámetro. 
      */
     public MessagePost masCercana(int time)
     {
         //TODO Implementar este método, incluyendo posiblemente chequeo de precondición
+        time = 0;
+        int a = messages.size() - 1;
+        while(time < a){
+            int mid = (time + a) / 2;
+            if(time == a){
+              System.out.println(a);
+            }
+            if(time>a){
+                mid = a - time;
+            }
+            else{
+                mid = a + time;
+            }
+         }
         return null;
     }
     
@@ -81,7 +115,7 @@ public class NewsFeed
     public boolean repOK()
     {
         //TODO Implementar este método
-        return false;
+        return messages != null;
     }
     
 }
