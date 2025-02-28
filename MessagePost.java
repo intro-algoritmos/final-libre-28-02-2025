@@ -40,10 +40,10 @@ public class MessagePost
         if(author == null || author.isEmpty() || text == null || text.isEmpty()){
             throw new IllegalArgumentException ("El autor o mensaje no puede ser nulo ni vacio");
         }
-        int like = 0;
-        long timestamp = System.currentTimeMillis();
-        String messaje = text;
-        String username = author;
+        int like = 0; // mal nombre de campo
+        long timestamp = System.currentTimeMillis(); // mal. Crea variable local
+        String messaje = text; // mal. Crea variable local
+        String username = author; // mal. Crea variable local
         
     }
 
@@ -100,7 +100,7 @@ public class MessagePost
         if(username == null || username.isEmpty() || message == null || message.isEmpty()){
             return false;
         }
-        if(timestamp < 0 || likes < 0){
+        if(timestamp < 0 || likes < 0){ // mal corrección
             return false;
         }
         return true;    

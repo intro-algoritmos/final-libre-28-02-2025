@@ -52,7 +52,7 @@ public class NewsFeed
             index ++;
         }
         
-        messages.add(message);
+        messages.add(message); // mal. No inserta el mensaje en la posición adecuada
     }
 
 
@@ -113,7 +113,7 @@ public class NewsFeed
         
         for(MessagePost mensaje : messages){
             if(mensaje.getTimeStamp() == time){
-                masCercano = mensaje;
+                masCercano = mensaje; //mal. No resuelve el problema. Retorna el que coincide con el time, no el más cercano
             }
         }
         return masCercano;
@@ -146,13 +146,13 @@ public class NewsFeed
             while(index < messages.size() && mensaje.getTimeStamp() > messages.get(index).getTimeStamp()){
                 index ++;
             }
-            return true;
+            return true; // mal. Retorna abruptamente. No usa el índice.
         }
         
         for(MessagePost mensaje : messages){
             long timeStamp = mensaje.getTimeStamp();
             if(timeStamp == mensaje.getTimeStamp()){
-                return false;
+                return false; // mal. 
             }
         }
         return true;
