@@ -12,7 +12,7 @@ import java.util.ArrayList;
  */
 public class NewsFeed
 {
-    
+
     // posts del newsfeed
     private ArrayList<MessagePost> messages;
 
@@ -35,6 +35,19 @@ public class NewsFeed
     public void addMessagePost(MessagePost message)
     {
         //TODO implementar este método, incluyendo chequeo de precondición.
+        if(message == null || !message.repOK1()){
+            throw new IllegalStateException("Mensaje no puede ser nulo, y debe satisfacer su propio invariante.");
+        }
+        for(MessagePost mensaje : messages){
+            if(mensaje.getTimeStamp() == message.getTimeStamp()){
+                throw new IllegalStateException("Ya existe un mensaje con el mismo timestamp");
+            }
+        }
+        int i = 0;
+        while(i < messages.size() && messages.get(i).getTimeStamp() < message.getTimeStamp()){
+            i++;
+        }
+        messages.add(i,message);
     }
 
 
@@ -48,6 +61,17 @@ public class NewsFeed
     public void eliminarUsername(String username)
     {
         //TODO: Implementar este método, incluyendo chequeo de precondición.
+        if(username == null || username.isEmpty()){
+            throw new IllegalStateException("username no puede ser nulo, ni vacio");
+        }
+        int i = 0;
+        while(i < messages.size()){
+            if(messages.get(i).getUsername().equals(username)){
+                messages.remove(i);
+            }else{
+                i++;
+            }
+        }
     }
     
     /**
@@ -56,8 +80,15 @@ public class NewsFeed
      */
     public ArrayList<String> ceroLikes()
     {
-        return null;
         //TODO Implementar este método, incluyendo posiblemente chequeo de precondición
+        ArrayList<String> ceroLikes = new ArrayList<>();
+        for(MessagePost message : messages){
+            if(message.getLikes() == 0){
+                ceroLikes.add(message.toString());
+            }
+        }
+        System.out.println(ceroLikes);
+        return ceroLikes;
     }
     
     /**
@@ -68,9 +99,32 @@ public class NewsFeed
     public MessagePost masCercana(int time)
     {
         //TODO Implementar este método, incluyendo posiblemente chequeo de precondición
-        return null;
+    if(time < 0){
+            throw new IllegalStateException("time no puede ser negativo");
     }
-    
+    MessagePost resultado = null;
+    for(int i = 0; i < messages.size();i++){
+        for(int j = i + 1; j < messages.size();j++){
+                if(Math.abs(messages.get(i).getTimeStamp()) < time){
+                    if(Math.abs(messages.get(j).getTimeStamp()) < time){
+                        if(Math.abs(messages.get(i).getTimeStamp()) > Math.abs(messages.get(j).getTimeStamp())){
+                            resultado = messages.get(i);
+                        }
+                    }
+                }else{
+                if(Math.abs(messages.get(i).getTimeStamp()) > time){
+                        if(Math.abs(messages.get(j).getTimeStamp()) > time){
+                            if(Math.abs(messages.get(i).getTimeStamp()) < Math.abs(messages.get(j).getTimeStamp())){
+                                resultado = messages.get(i);
+                            }
+                        }
+                    }   
+            }   
+        }
+    }   
+    System.out.println(resultado);
+    return resultado;
+}
     /**
      * Invariante de clase de NewsFeed. Un NewsFeed se considera válido, o
      * internamente consistente, si su lista de posts no es nula, todos los posts de la lista
@@ -81,7 +135,33 @@ public class NewsFeed
     public boolean repOK()
     {
         //TODO Implementar este método
-        return false;
-    }
+        if(messages.size() == 0){
+            return false;
+        }
+        for(MessagePost message : messages){
+            if(message == null || !message.repOK1()){
+                return false;
+            }
+        }
+        for(int i = 0; i < messages.size();i++){
+            for(int j = i + 1; j < messages.size();j++){
+                if(messages.get(i).getTimeStamp() == messages.get(j).getTimeStamp()){
+                    return false;
+                }
+            }
+        }
+        
+        for(int i = 0; i < messages.size();i++){
+            for(int j = i + 1; j < messages.size();j++){
+                if(messages.get(i).getTimeStamp() > messages.get(j).getTimeStamp()){
+                    return false;
+                }
+            }
+        }
+        return true;
+}
     
+public void listMessage(){
+        System.out.println(messages);
+}
 }

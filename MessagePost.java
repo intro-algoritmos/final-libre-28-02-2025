@@ -22,7 +22,8 @@ public class MessagePost
     
     // cantidad de likes
     private int likes;
-
+    
+    private static long artificialtime = 0;
     /**
      * Constructor de objetos de la clase MessagePost. La creación setea tanto el username como el 
      * contenido del mensaje con los parámetros respectivos del método.
@@ -37,6 +38,17 @@ public class MessagePost
     public MessagePost(String author, String text)
     {
         //TODO implementar este método incluyendo chequeo de precondición
+        if(author == null || author.isEmpty()){
+            throw new IllegalStateException("Author no puede ser nulo, ni vacio");
+        }
+        if(text == null || text.isEmpty()){
+            throw new IllegalStateException("el mensaje no puede ser nulo, ni vacio");
+        }
+        this.username = author;
+        this.message = text;
+        this.likes = 0;
+        this.timestamp = System.currentTimeMillis();
+        //artificialtime; artificialtime++;
     }
 
     /**
@@ -77,8 +89,15 @@ public class MessagePost
     {
         return timestamp;
     }
-
-
+    
+    public String getUsername(){
+        return username;
+    }
+    
+    public int getLikes(){
+        return likes;
+    }
+    
     /**
      * Invariante de la clase MessagePost.
      * Un messagepost es internamente consistente si su username es no nulo y no vacío, 
@@ -86,10 +105,22 @@ public class MessagePost
      * de likes es mayor o igual a cero.
      * @return true ssi el objeto es internamente consistente (satisface el invariante de clase).
      */
-    public boolean repOK() 
+    public boolean repOK1() 
     {
         //TODO Implementar este método
-        return false;    
+        if( username == null || username.isEmpty()){
+            return false;
+        }
+        if(message == null || message.isEmpty()){
+            return false;
+        }
+        if(timestamp < 0){
+            return false;
+        }
+        if(likes < 0){
+            return false;
+        }
+        return true;
     }
     
     
@@ -102,6 +133,6 @@ public class MessagePost
     public String toString()
     {
         //TODO Implementar este método
-        return null;
+        return username + ": " + message + " (posteado en " + timestamp + "). A " + likes + " personas le gustó este mensaje.";
     }
 }
