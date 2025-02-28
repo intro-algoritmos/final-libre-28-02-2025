@@ -38,9 +38,9 @@ public class NewsFeed
         if(message == null || message.equals("")){
             throw new IllegalArgumentException (" el mensaje no puede ser nulo ni vacio");
         }
-        
+        // mal. Chequeo de precondición incompleto
         MessagePost mensaje;
-        for(int i = 0 ; i < messages.size() - 1 ; i++){
+        for(int i = 0 ; i < messages.size() - 1 ; i++){ // mal. Usa dos ciclos para chequear ausencia de repetidos. No compara con message
             for( int j = i + 1; j < messages.size() ; j++){
                 if(messages.get(i).getTimeStamp() == messages.get(j).getTimeStamp()){
                     throw new IllegalArgumentException (" no debe existir en la lista otro mensaje con el mismo timestamp");
@@ -48,7 +48,7 @@ public class NewsFeed
             }
         }
         int k = 0;
-        while(k < messages.size()){
+        while(k < messages.size()){ // mal. Index out of bounds
             if( messages.get(k).getTimeStamp() < messages.get(k + 1 ).getTimeStamp()){
                 throw new IllegalArgumentException ("la lista de mensajes no esta de manera ordenada por timestamp ");
             
@@ -75,7 +75,7 @@ public class NewsFeed
         int i = 0;
         for(MessagePost usuario : messages){
             if(usuario.getAuthor().equals(messages.get(i).getText())){
-                messages.remove(usuario);
+                messages.remove(usuario); // mal. Cuerpo destructivo en ciclo for-each
             }else{
                 i++;
             }
@@ -93,11 +93,11 @@ public class NewsFeed
         ArrayList<String> ceroLikes;
         for(MessagePost mensaje : messages){
             if(mensaje.getLike() == 0){
-                System.out.println(mensaje);
+                System.out.println(mensaje); // mal. El output no debería ser por stdout
             }else{
                 throw new IllegalArgumentException("la lista tiene que ser de posts con 0 likes");
             }
-            messages.add(mensaje);
+            messages.add(mensaje); // mal. Duplica mensajes
         }
         return ceroLikes();
         //TODO Implementar este método, incluyendo posiblemente chequeo de precondición
@@ -113,7 +113,7 @@ public class NewsFeed
         //TODO Implementar este método, incluyendo posiblemente chequeo de precondición
         Math.abs(time);
        for(int i = 0; i < messages.size() - 1;i ++){
-            for( int j = i + 1 ; j < messages.size(); j++){
+            for( int j = i + 1 ; j < messages.size(); j++){ // mal. No resuelve el problema.
                 if(messages.get(i).getTimeStamp() == time){
                     return messages.get(i);
                 }else{
@@ -145,7 +145,7 @@ public class NewsFeed
             }
         }
         int i = 0;
-        for(MessagePost obj : messages){
+        for(MessagePost obj : messages){ // mal. Repok incorrecto.
             if(obj.getTimeStamp() == messages.get(i).getTimeStamp()){
                 return false;
             }else {

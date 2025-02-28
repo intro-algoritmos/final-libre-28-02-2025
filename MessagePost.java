@@ -38,7 +38,7 @@ public class MessagePost
     {
         //TODO implementar este método incluyendo chequeo de precondición
         if(likes != 0){
-            throw new IllegalArgumentException("la cantidad de likes debe ser 0(cero)");
+            throw new IllegalArgumentException("la cantidad de likes debe ser 0(cero)"); // mal. No es un parámetro
         }
         if(author == null || author.isEmpty()){
             throw new IllegalArgumentException("el author no puede ser nulo ni vacìo");
@@ -49,7 +49,7 @@ public class MessagePost
         this.username = author;
         this.message = text;
         this.timestamp = System.currentTimeMillis();
-        this.likes = likes;
+        this.likes = likes; // mal.
         }
     
     /**
@@ -128,6 +128,7 @@ public class MessagePost
     public String toString()
     {
         //TODO Implementar este método
+        // no comple con el formato requerido
         return "usuario : " + username + "/"+ "Mensaje : " + message + "("+ timestamp +")"  + "/" + "likes : " + likes;
     }
     
