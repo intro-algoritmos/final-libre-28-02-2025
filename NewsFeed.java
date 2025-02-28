@@ -46,8 +46,8 @@ public class NewsFeed
                 throw new IllegalArgumentException("ya hay un mensaje con ese timestamp");
             }
         }
-        messages.add(message);
-        System.out.println("nuevo mensaje: "+messages);
+        messages.add(message); // error. No mantiene orden respecto al timestamp.
+        System.out.println("nuevo mensaje: "+messages); // innecesario
     }
 
 
@@ -66,7 +66,7 @@ public class NewsFeed
         }
         for(MessagePost autor:messages){
             if(autor.getUsername().equals(username)){
-                messages.remove(username);
+                messages.remove(username); // error, usa for-each con ciclo destructivo
                 System.out.println("lista actualizada: "+messages);
             }
         }
@@ -79,7 +79,7 @@ public class NewsFeed
     public ArrayList<String> ceroLikes()
     {
         
-        return ceroLikes();
+        return ceroLikes(); // recursión infinita
         //TODO Implementar este método, incluyendo posiblemente chequeo de precondición
     }
     
@@ -94,7 +94,7 @@ public class NewsFeed
         int tiempoCerc=0;
         for(MessagePost masCerca:messages){
             int nuevotiempo=0;
-            
+            // incompleto
             }
             return null;
         }
@@ -112,7 +112,7 @@ public class NewsFeed
     {
         //TODO Implementar este método
         if(messages== null){
-            return true;
+            return true; // mal
         }
         for(MessagePost posteos:messages){
             if(posteos.getMessage()== null){
@@ -125,7 +125,7 @@ public class NewsFeed
         for(int i=0; i<messages.size();i++){
             for(int j=i+1;j< messages.size();j++){
                 if(messages.get(i).getTimeStamp()==(messages.get(j).getTimeStamp())){
-                    return true;
+                    return true; // mal, hay que tener en cuenta la "negativa"
                 }
             }
             if(i>0 && messages.get(i).getTimeStamp() < messages.get(i-1).getTimeStamp()){

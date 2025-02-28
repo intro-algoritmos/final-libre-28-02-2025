@@ -44,8 +44,8 @@ public class MessagePost
             throw new IllegalArgumentException("no puede ser nulo ni vacio");
         }
         
-        Math.abs(timestamp);
-        System.currentTimeMillis();
+        Math.abs(timestamp); // error. Invoca pero no guarda el valor
+        System.currentTimeMillis(); // error. Invoca pero no guarda el valor
         
         if(likes != 0){
             throw new IllegalArgumentException("likes tiene q ser 0");
@@ -112,7 +112,7 @@ public class MessagePost
         if(message== null && message.isEmpty()){
             return false;
         }
-        if(timestamp<0){
+        if(timestamp<0){ // error. timestamp no puede ser cero.
             return false;
         }
         if(likes<0){
@@ -131,6 +131,7 @@ public class MessagePost
     public String toString()
     {
         //TODO Implementar este método
+        // error, no respeta formato
         return username+":"+message+timestamp+" A "+likes+" personas les gusto este mensaje";
     }
     public String getUsername()
