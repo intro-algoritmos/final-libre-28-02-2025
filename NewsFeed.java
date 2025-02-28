@@ -35,6 +35,19 @@ public class NewsFeed
     public void addMessagePost(MessagePost message)
     {
         //TODO implementar este método, incluyendo chequeo de precondición.
+        if(message==null){
+            throw new IllegalArgumentException("el mensaje no debe ser nulo");
+        }
+        if(!message.repOK()){
+            throw new IllegalArgumentException("el mensaje debe sastifacer su invariante");
+        }
+        for(MessagePost mensaje:messages){
+            if(mensaje.getTimeStamp() == message.getTimeStamp()){
+                throw new IllegalArgumentException("ya hay un mensaje con ese timestamp");
+            }
+        }
+        messages.add(message);
+        System.out.println("nuevo mensaje: "+messages);
     }
 
 
@@ -48,6 +61,15 @@ public class NewsFeed
     public void eliminarUsername(String username)
     {
         //TODO: Implementar este método, incluyendo chequeo de precondición.
+        if(username==null || username.isEmpty()){
+            throw new IllegalArgumentException("El nombre no debe ser nulo ni vacio");
+        }
+        for(MessagePost autor:messages){
+            if(autor.getUsername().equals(username)){
+                messages.remove(username);
+                System.out.println("lista actualizada: "+messages);
+            }
+        }
     }
     
     /**
@@ -56,7 +78,8 @@ public class NewsFeed
      */
     public ArrayList<String> ceroLikes()
     {
-        return null;
+        
+        return ceroLikes();
         //TODO Implementar este método, incluyendo posiblemente chequeo de precondición
     }
     
@@ -68,8 +91,15 @@ public class NewsFeed
     public MessagePost masCercana(int time)
     {
         //TODO Implementar este método, incluyendo posiblemente chequeo de precondición
-        return null;
-    }
+        int tiempoCerc=0;
+        for(MessagePost masCerca:messages){
+            int nuevotiempo=0;
+            
+            }
+            return null;
+        }
+        
+    
     
     /**
      * Invariante de clase de NewsFeed. Un NewsFeed se considera válido, o
@@ -81,7 +111,28 @@ public class NewsFeed
     public boolean repOK()
     {
         //TODO Implementar este método
-        return false;
+        if(messages== null){
+            return true;
+        }
+        for(MessagePost posteos:messages){
+            if(posteos.getMessage()== null){
+                return false;
+            }
+            if(!posteos.repOK()){
+                return false;
+            }
+        }
+        for(int i=0; i<messages.size();i++){
+            for(int j=i+1;j< messages.size();j++){
+                if(messages.get(i).getTimeStamp()==(messages.get(j).getTimeStamp())){
+                    return true;
+                }
+            }
+            if(i>0 && messages.get(i).getTimeStamp() < messages.get(i-1).getTimeStamp()){
+                return false;
+            }
+        }
+        return true;
     }
     
 }
