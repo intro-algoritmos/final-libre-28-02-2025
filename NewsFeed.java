@@ -35,6 +35,24 @@ public class NewsFeed
     public void addMessagePost(MessagePost message)
     {
         //TODO implementar este método, incluyendo chequeo de precondición.
+        if(message == null || message.equals("") || !message.repOK()){
+            throw new IllegalArgumentException ("Mensaje no valido");
+        }
+        
+        long timestampMessage = message.getTimeStamp();
+        for(MessagePost mensaje : messages){
+            if(mensaje.getTimeStamp() == timestampMessage){
+                throw new IllegalArgumentException ("Ya existe en la lista un mensaje con este timestamp");
+            }
+        }
+       
+        int index = 0;
+        
+        while(index < messages.size() && message.getTimeStamp() > messages.get(index).getTimeStamp()){
+            index ++;
+        }
+        
+        messages.add(message);
     }
 
 
@@ -48,6 +66,18 @@ public class NewsFeed
     public void eliminarUsername(String username)
     {
         //TODO: Implementar este método, incluyendo chequeo de precondición.
+        if(username == null || username.isEmpty()){
+            throw new IllegalArgumentException("El username no debe ser nulo ni vacio");
+        }
+        
+        ArrayList <MessagePost> eliminarMensaje = new ArrayList <>();
+        
+        for(MessagePost mensaje : messages){
+            if(mensaje.getUsername() == username){
+                eliminarMensaje.add(mensaje);
+            }
+        }
+        messages.removeAll(eliminarMensaje);
     }
     
     /**
@@ -56,8 +86,17 @@ public class NewsFeed
      */
     public ArrayList<String> ceroLikes()
     {
-        return null;
         //TODO Implementar este método, incluyendo posiblemente chequeo de precondición
+        ArrayList<String> ceroLikes = new ArrayList <>();
+        
+        for(MessagePost mensaje : messages){
+           if(mensaje.getLikes() == 0){
+            String mensajeNoLikes = mensaje.getText();
+            ceroLikes.add(mensajeNoLikes);
+           }
+        }
+        
+        return ceroLikes;
     }
     
     /**
@@ -68,7 +107,17 @@ public class NewsFeed
     public MessagePost masCercana(int time)
     {
         //TODO Implementar este método, incluyendo posiblemente chequeo de precondición
-        return null;
+        // Solo contempla el caso en el que el parametro time es igual al time stamp de algun elemento de la lista messages.
+        // No pude realizar correctamente la comparacion entre time stamp distintos y devolver el mas cercano
+        MessagePost masCercano = null;
+        
+        for(MessagePost mensaje : messages){
+            if(mensaje.getTimeStamp() == time){
+                masCercano = mensaje;
+            }
+        }
+        return masCercano;
+        
     }
     
     /**
@@ -81,7 +130,32 @@ public class NewsFeed
     public boolean repOK()
     {
         //TODO Implementar este método
-        return false;
+        if(messages == null){
+            return false;
+        }
+        
+        for(MessagePost mensaje : messages){
+            if(mensaje == null || !mensaje.repOK()){
+                return false;
+            }
+        }
+        
+        for(MessagePost mensaje : messages){
+            int index = 0;
+        
+            while(index < messages.size() && mensaje.getTimeStamp() > messages.get(index).getTimeStamp()){
+                index ++;
+            }
+            return true;
+        }
+        
+        for(MessagePost mensaje : messages){
+            long timeStamp = mensaje.getTimeStamp();
+            if(timeStamp == mensaje.getTimeStamp()){
+                return false;
+            }
+        }
+        return true;
     }
     
 }

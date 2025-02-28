@@ -37,6 +37,14 @@ public class MessagePost
     public MessagePost(String author, String text)
     {
         //TODO implementar este método incluyendo chequeo de precondición
+        if(author == null || author.isEmpty() || text == null || text.isEmpty()){
+            throw new IllegalArgumentException ("El autor o mensaje no puede ser nulo ni vacio");
+        }
+        int like = 0;
+        long timestamp = System.currentTimeMillis();
+        String messaje = text;
+        String username = author;
+        
     }
 
     /**
@@ -89,7 +97,13 @@ public class MessagePost
     public boolean repOK() 
     {
         //TODO Implementar este método
-        return false;    
+        if(username == null || username.isEmpty() || message == null || message.isEmpty()){
+            return false;
+        }
+        if(timestamp < 0 || likes < 0){
+            return false;
+        }
+        return true;    
     }
     
     
@@ -102,6 +116,14 @@ public class MessagePost
     public String toString()
     {
         //TODO Implementar este método
-        return null;
+        return username + ": " + message + " (posteado en "+ timestamp +"). A " + likes + " personas les gusto este mensaje.";
+    }
+    
+    public String getUsername(){
+        return username;
+    }
+    
+    public int getLikes(){
+        return likes;
     }
 }
