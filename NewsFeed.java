@@ -35,6 +35,26 @@ public class NewsFeed
     public void addMessagePost(MessagePost message)
     {
         //TODO implementar este método, incluyendo chequeo de precondición.
+        if(message == null || message.equals("")){
+            throw new IllegalArgumentException (" el mensaje no puede ser nulo ni vacio");
+        }
+        
+        MessagePost mensaje;
+        for(int i = 0 ; i < messages.size() - 1 ; i++){
+            for( int j = i + 1; j < messages.size() ; j++){
+                if(messages.get(i).getTimeStamp() == messages.get(j).getTimeStamp()){
+                    throw new IllegalArgumentException (" no debe existir en la lista otro mensaje con el mismo timestamp");
+                }
+            }
+        }
+        int k = 0;
+        while(k < messages.size()){
+            if( messages.get(k).getTimeStamp() < messages.get(k + 1 ).getTimeStamp()){
+                throw new IllegalArgumentException ("la lista de mensajes no esta de manera ordenada por timestamp ");
+            
+            }
+        }
+        messages.add(message);
     }
 
 
@@ -48,6 +68,20 @@ public class NewsFeed
     public void eliminarUsername(String username)
     {
         //TODO: Implementar este método, incluyendo chequeo de precondición.
+        if(username == null || username.isEmpty()){
+            throw new IllegalArgumentException("el usuario no puede ser nulo ni vacio");
+        }
+        
+        int i = 0;
+        for(MessagePost usuario : messages){
+            if(usuario.getAuthor().equals(messages.get(i).getText())){
+                messages.remove(usuario);
+            }else{
+                i++;
+            }
+        }
+        
+        
     }
     
     /**
@@ -56,7 +90,16 @@ public class NewsFeed
      */
     public ArrayList<String> ceroLikes()
     {
-        return null;
+        ArrayList<String> ceroLikes;
+        for(MessagePost mensaje : messages){
+            if(mensaje.getLike() == 0){
+                System.out.println(mensaje);
+            }else{
+                throw new IllegalArgumentException("la lista tiene que ser de posts con 0 likes");
+            }
+            messages.add(mensaje);
+        }
+        return ceroLikes();
         //TODO Implementar este método, incluyendo posiblemente chequeo de precondición
     }
     
@@ -68,6 +111,18 @@ public class NewsFeed
     public MessagePost masCercana(int time)
     {
         //TODO Implementar este método, incluyendo posiblemente chequeo de precondición
+        Math.abs(time);
+       for(int i = 0; i < messages.size() - 1;i ++){
+            for( int j = i + 1 ; j < messages.size(); j++){
+                if(messages.get(i).getTimeStamp() == time){
+                    return messages.get(i);
+                }else{
+                    if(messages.get(j).getTimeStamp() == time){
+                        return messages.get(j);
+                    }
+                } 
+            }
+        }
         return null;
     }
     
@@ -81,7 +136,29 @@ public class NewsFeed
     public boolean repOK()
     {
         //TODO Implementar este método
-        return false;
+        if(messages == null || messages.isEmpty()){
+            return false;
+        }
+        for(MessagePost mensaje : messages){
+            if(mensaje.getText() == null || !mensaje.repOK()){
+                return false;
+            }
+        }
+        int i = 0;
+        for(MessagePost obj : messages){
+            if(obj.getTimeStamp() == messages.get(i).getTimeStamp()){
+                return false;
+            }else {
+                i ++;
+            }
+        }
+        
+        while(i < messages.size()){
+            if(messages.get(i).getTimeStamp() < messages.get(i + 1).getTimeStamp()){
+                return false;
+            }
+        }
+        return true;
     }
     
 }

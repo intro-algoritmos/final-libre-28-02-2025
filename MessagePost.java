@@ -37,14 +37,28 @@ public class MessagePost
     public MessagePost(String author, String text)
     {
         //TODO implementar este método incluyendo chequeo de precondición
-    }
-
+        if(likes != 0){
+            throw new IllegalArgumentException("la cantidad de likes debe ser 0(cero)");
+        }
+        if(author == null || author.isEmpty()){
+            throw new IllegalArgumentException("el author no puede ser nulo ni vacìo");
+        }
+        if(text == null || text.isEmpty()){
+            throw new IllegalArgumentException("El texto del mensaje no puede ser nulo ni vacìo");
+        }
+        this.username = author;
+        this.message = text;
+        this.timestamp = System.currentTimeMillis();
+        this.likes = likes;
+        }
+    
     /**
      * Agrega un "like" al mensaje actual
      */
     public void like()
     {
         likes++;
+        
     }
 
     /**
@@ -55,6 +69,7 @@ public class MessagePost
         if (likes > 0) {
             likes--;
         }
+        
     }
 
 
@@ -89,9 +104,20 @@ public class MessagePost
     public boolean repOK() 
     {
         //TODO Implementar este método
-        return false;    
+        if(username == null || username.isEmpty()){
+            return false;
+        }
+        if(message == null || message.isEmpty()){
+            return false;
+        }
+        if(timestamp <= 0){
+            return false;
+        }
+        if(likes < 0){
+            return false;
+        }
+        return true;    
     }
-    
     
     /**
      * Retorna los detalles del message post, como
@@ -102,6 +128,14 @@ public class MessagePost
     public String toString()
     {
         //TODO Implementar este método
-        return null;
+        return "usuario : " + username + "/"+ "Mensaje : " + message + "("+ timestamp +")"  + "/" + "likes : " + likes;
+    }
+    
+    public String getAuthor(){
+        return username;
+    }
+    
+    public int getLike(){
+        return likes;
     }
 }
