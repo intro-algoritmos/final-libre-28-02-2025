@@ -39,7 +39,7 @@ public class NewsFeed
             throw new IllegalStateException("Mensaje no puede ser nulo, y debe satisfacer su propio invariante.");
         }
         for(MessagePost mensaje : messages){
-            if(mensaje.getTimeStamp() == message.getTimeStamp()){
+            if(mensaje.getTimeStamp() == message.getTimeStamp()){ 
                 throw new IllegalStateException("Ya existe un mensaje con el mismo timestamp");
             }
         }
@@ -84,7 +84,7 @@ public class NewsFeed
         ArrayList<String> ceroLikes = new ArrayList<>();
         for(MessagePost message : messages){
             if(message.getLikes() == 0){
-                ceroLikes.add(message.toString());
+                ceroLikes.add(message.toString()); // mal. message.getText()
             }
         }
         System.out.println(ceroLikes);
@@ -103,7 +103,7 @@ public class NewsFeed
             throw new IllegalStateException("time no puede ser negativo");
     }
     MessagePost resultado = null;
-    for(int i = 0; i < messages.size();i++){
+    for(int i = 0; i < messages.size();i++){ // mal la noción de distancia utilizada.
         for(int j = i + 1; j < messages.size();j++){
                 if(Math.abs(messages.get(i).getTimeStamp()) < time){
                     if(Math.abs(messages.get(j).getTimeStamp()) < time){
@@ -135,7 +135,7 @@ public class NewsFeed
     public boolean repOK()
     {
         //TODO Implementar este método
-        if(messages.size() == 0){
+        if(messages.size() == 0){ // mal
             return false;
         }
         for(MessagePost message : messages){

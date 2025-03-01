@@ -114,7 +114,7 @@ public class MessagePost
         if(message == null || message.isEmpty()){
             return false;
         }
-        if(timestamp < 0){
+        if(timestamp < 0){ // mal condición
             return false;
         }
         if(likes < 0){
